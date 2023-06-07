@@ -24,7 +24,9 @@ from shop.views import pageNotFound
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('shop.urls'))
+    path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
+    path('', include('shop.urls', namespace='shop'))
 ]
 
 if DEBUG:

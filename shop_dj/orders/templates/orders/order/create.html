@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <section>
+        <h1>Оформление заказа</h1>
+        <section>
+            <h3>Ваш заказ</h3>
+            <ul>
+                {% for item in cart %}
+                    <li>
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>${{ item.total_price }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p>Всего: ${{ cart.get_total_price }}</p>
+        </section>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Оформить</button>
+        </form>
+    </section>
+{% endblock %}

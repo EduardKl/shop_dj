@@ -6,6 +6,9 @@ class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
+    def get_absolute_url(self):
+        return reverse('product_list_by_category', kwargs={'category_slug': self.slug})
+
     def __str__(self):
         return self.name
     class Meta:
@@ -26,7 +29,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
 
     def get_absolute_url(self):
-        return reverse('product', kwargs={'product_slug': self.slug})
+        return reverse('shop:product_detail', kwargs={'id': self.id, 'slug': self.slug})
     def __str__(self):
         return self.name
 
